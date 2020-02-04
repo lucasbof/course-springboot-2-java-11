@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.course.entities.Order;
 import com.example.course.services.OrderService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/orders")
 public class OrderResource {
@@ -19,12 +21,14 @@ public class OrderResource {
 	@Autowired
 	private OrderService service;
 
+	@ApiOperation(value = "Busca todas os pedidos")
 	@GetMapping
 	public ResponseEntity<List<Order>> findAll() {
 		List<Order> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@ApiOperation(value = "Busca um pedido por id")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Order> findById(@PathVariable Long id) {
 		Order obj = service.findById(id);
